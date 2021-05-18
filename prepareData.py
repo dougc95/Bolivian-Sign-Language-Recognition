@@ -8,34 +8,6 @@ import pandas as pd
 import holisticModule as hm
 
 
-# p2 is ref point, If you want the the angle between the line defined by these two points and the horizontal axis
-def get_angleX(p1, p2):
-    return int(np.round(np.arctan2((p2[1] - p1[1]), (p2[0] - p1[0])) * 180 / np.pi))
-
-
-def get_distance(p1, p2):
-    coordinate_distance = math.sqrt(((p1[0] - p2[0]) ** 2) + ((p1[1] - p2[1]) ** 2))
-    return int(coordinate_distance)
-
-
-# Calculate distance matrix from an specific point(in this case NOSE) to the other points of interest
-def get_distMat(matrixHolistic, matrixLeft, matrixRight):
-    distList = []
-    NOSE = matrixHolistic[0]
-    for i in matrixHolistic:
-        distList.append([get_distance(NOSE, i), get_angleX(NOSE, i)])
-    for i in matrixLeft:
-        distList.append([get_distance(NOSE, i), get_angleX(NOSE, i)])
-    for i in matrixRight:
-        distList.append([get_distance(NOSE, i), get_angleX(NOSE, i)])
-    print('Matriz de Dist')
-    print(distList)
-    print('Matriz de Dist - NOSE')
-    print(distList[1:])
-    print(f"El tamaño de DISTANCIA: {len(distList)}")
-    return distList[1:]
-
-
 class Preprocessor:
     def __init__(self):
         self.matrix = np.zeros(42)
@@ -51,6 +23,31 @@ class Preprocessor:
             df = df.iloc[:, 1:]  # Drops first column
         print(df)
         df.to_csv(file_name, index=True)
+
+    # p2 is ref point, If you want the the angle between the line defined by these two points and the horizontal axis
+    def get_angleX(self,p1, p2):
+        return int(np.round(np.arctan2((p2[1] - p1[1]), (p2[0] - p1[0])) * 180 / np.pi))
+
+    def get_distance(self,p1, p2):
+        coordinate_distance = math.sqrt(((p1[0] - p2[0]) ** 2) + ((p1[1] - p2[1]) ** 2))
+        return int(coordinate_distance)
+
+    # Calculate distance matrix from an specific point(in this case NOSE) to the other points of interest
+    def get_distMat(self,matrixHolistic, matrixLeft, matrixRight):
+        distList = []
+        NOSE = matrixHolistic[0]
+        for i in matrixHolistic:
+            distList.append([self.get_distance(NOSE, i), self.get_angleX(NOSE, i)])
+        for i in matrixLeft:
+            distList.append([self.get_distance(NOSE, i), self.get_angleX(NOSE, i)])
+        for i in matrixRight:
+            distList.append([self.get_distance(NOSE, i), self.get_angleX(NOSE, i)])
+        print('Matriz de Dist')
+        print(distList)
+        print('Matriz de Dist - NOSE')
+        print(distList[1:])
+        print(f"El tamaño de DISTANCIA: {len(distList)}")
+        return distList[1:]
 
 
 def main():
