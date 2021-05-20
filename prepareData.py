@@ -28,6 +28,19 @@ class Preprocessor:
         print(file_name)
         df.to_csv(file_name, index=True)
 
+    def convert2csv(self, file_path, file):
+        print("PRUEBA 1")
+        print(file_path)
+        file = os.path.basename(file)[0:-4]
+        file_name = file_path+"/"+file+'.csv'
+        print(file_name)
+        df = pd.DataFrame(self.matrix)
+        if self.matrix.shape[1] > 1:
+            df = df.iloc[:, 1:]  # Drops first column
+        print("PRUEBA 2")
+        print(file_name)
+        df.to_csv(file_name, index=True)
+
     # p2 is ref point, If you want the the angle between the line defined by these two points and the horizontal axis
     def get_angleX(self, p1, p2):
         return int(np.round(np.arctan2((p2[1] - p1[1]), (p2[0] - p1[0])) * 180 / np.pi))
@@ -46,11 +59,11 @@ class Preprocessor:
             distList.append({self.get_distance(NOSE, i), self.get_angleX(NOSE, i)})
         for i in matrixRight:
             distList.append({self.get_distance(NOSE, i), self.get_angleX(NOSE, i)})
-        print('Matriz de Dist')
-        print(distList)
-        print('Matriz de Dist - NOSE')
-        print(distList[1:])
-        print(f"El tamaño de DISTANCIA: {len(distList)}")
+        # print('Matriz de Dist')
+        # print(distList)
+        # print('Matriz de Dist - NOSE')
+        # print(distList[1:])
+        # print(f"El tamaño de DISTANCIA: {len(distList)}")
         return distList[1:]
 
 

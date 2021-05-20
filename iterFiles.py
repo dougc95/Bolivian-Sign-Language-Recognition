@@ -15,17 +15,20 @@ def create_dataFolders(CATEGORY, DATADIR, LABEL):
         preprocess = prep.Preprocessor()
         path = os.path.join(DATADIR, category)
         lblPath = os.path.join(LABEL, category)
+        if not(lblPath):
+            os.mkdir(lblPath)
         for vid in os.listdir(path):
-            cap = cv2.VideoCapture(vid)
-            ret, frame = cap.read()
-            while ret:
+            print(f"El video a rep es: {vid}")
+            cap = cv2.VideoCapture(f"{DATADIR}/{category}/{vid}")
+            while True:
                 ret, frame = cap.read()
                 detector.find_pose(frame)
                 detector.get_lm()
                 mat1, mat2, mat3 = detector.get_matrix()
-                feat_vec = prep.get_distMat(mat1, mat2, mat3)
+                feat_vec = preprocess.get_distMat(mat1, mat2, mat3)
                 preprocess.add_columns(feat_vec)
-            preprocess.cvt2csv(lblPath, vid)
+
+            preprocess.convert2csv(lblPath, vid)
             break
         break
 
@@ -37,7 +40,7 @@ def main():
     cwd = os.getcwd()
     if not (os.path.exists(f'{cwd}/labelsLSB')):
         os.mkdir(f'{cwd}/labelsLSB')
-    LABELS = f'{cwd}/labels'
+    LABELS = f'{cwd}/labelsLSB'
     create_dataFolders(CATEGORY, DATADIR, LABELS)
 
 
