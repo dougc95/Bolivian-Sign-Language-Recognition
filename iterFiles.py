@@ -12,16 +12,21 @@ import prepareData as prep
 def create_dataFolders(CATEGORY, DATADIR, LABEL):
     detector = hm.HolisticDetector()
     for category in CATEGORY:
-        preprocess = prep.Preprocessor()
+        print(f'La categoria actual: {category}')
         path = os.path.join(DATADIR, category)
         lblPath = os.path.join(LABEL, category)
-        if not(lblPath):
+        print(f'La etiqueta actual: {lblPath}')
+        if not (os.path.exists(lblPath)):
             os.mkdir(lblPath)
         for vid in os.listdir(path):
+            preprocess = prep.Preprocessor()
             print(f"El video a rep es: {vid}")
             cap = cv2.VideoCapture(f"{DATADIR}/{category}/{vid}")
-            while True:
+            ret, frame = cap.read()
+            while ret:
                 ret, frame = cap.read()
+                if not ret:
+                    continue
                 detector.find_pose(frame)
                 detector.get_lm()
                 mat1, mat2, mat3 = detector.get_matrix()
@@ -29,8 +34,8 @@ def create_dataFolders(CATEGORY, DATADIR, LABEL):
                 preprocess.add_columns(feat_vec)
 
             preprocess.convert2csv(lblPath, vid)
-            break
-        break
+            continue
+        continue
 
 
 def main():

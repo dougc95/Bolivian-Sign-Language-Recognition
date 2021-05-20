@@ -29,16 +29,11 @@ class Preprocessor:
         df.to_csv(file_name, index=True)
 
     def convert2csv(self, file_path, file):
-        print("PRUEBA 1")
-        print(file_path)
         file = os.path.basename(file)[0:-4]
         file_name = file_path+"/"+file+'.csv'
-        print(file_name)
         df = pd.DataFrame(self.matrix)
         if self.matrix.shape[1] > 1:
             df = df.iloc[:, 1:]  # Drops first column
-        print("PRUEBA 2")
-        print(file_name)
         df.to_csv(file_name, index=True)
 
     # p2 is ref point, If you want the the angle between the line defined by these two points and the horizontal axis
