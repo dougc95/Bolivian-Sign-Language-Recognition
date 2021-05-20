@@ -17,7 +17,7 @@ class Preprocessor:
         self.matrix = np.column_stack((self.matrix, feat_vector))
 
     def cvt2csv(self, file_path):
-        file_name = f'{file_path}/datos-vid'
+        file_name = f'{file_path}/datos-vid.csv'
         df = pd.DataFrame(self.matrix)
         if self.matrix.shape[1] > 1:
             df = df.iloc[:, 1:]  # Drops first column
@@ -37,11 +37,11 @@ class Preprocessor:
         distList = []
         NOSE = matrixHolistic[0]
         for i in matrixHolistic:
-            distList.append([self.get_distance(NOSE, i), self.get_angleX(NOSE, i)])
+            distList.append({self.get_distance(NOSE, i), self.get_angleX(NOSE, i)})
         for i in matrixLeft:
-            distList.append([self.get_distance(NOSE, i), self.get_angleX(NOSE, i)])
+            distList.append({self.get_distance(NOSE, i), self.get_angleX(NOSE, i)})
         for i in matrixRight:
-            distList.append([self.get_distance(NOSE, i), self.get_angleX(NOSE, i)])
+            distList.append({self.get_distance(NOSE, i), self.get_angleX(NOSE, i)})
         print('Matriz de Dist')
         print(distList)
         print('Matriz de Dist - NOSE')
@@ -51,12 +51,15 @@ class Preprocessor:
 
 
 def main():
+    # Check current directory
     cwd = os.getcwd()
+    # Check and create data directory
     if not (os.path.exists(f'{cwd}/data')):
         os.mkdir(f'{cwd}/data')
     DATA = f'{cwd}/data'
-
     print(cwd)
+    # Iterate through videos
+    DATASET_PATH = '/home/d3m1ur60/Desktop/LSBv2/'
     PATH1 = '/home/d3m1ur60/Desktop/LSBv2/Ayuda/ayuda_V1-0002.mp4'
     PATH2 = '/home/d3m1ur60/Desktop/LSBv2/Bolivia/bolivia_V1-0032.mp4'
     cap = cv2.VideoCapture(PATH2)
@@ -74,7 +77,7 @@ def main():
         detector.get_lm()
         detector.draw_pose(frame)  # Optional, just for drawing
         mat1, mat2, mat3 = detector.get_matrix()  # Returns holistic,left hand,right hand
-        feat_vec = get_distMat(mat1, mat2, mat3)
+        feat_vec = prep.get_distMat(mat1, mat2, mat3)
         prep.add_columns(feat_vec)
         # Get FPS
         counter = counter + 1
