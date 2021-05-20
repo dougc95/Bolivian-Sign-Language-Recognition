@@ -16,8 +16,9 @@ class Preprocessor:
         feat_vector = np.array(feat_vector)
         self.matrix = np.column_stack((self.matrix, feat_vector))
 
-    def cvt2csv(self, file_path):
-        file_name = f'{file_path}/datos-vid.csv'
+    def cvt2csv(self, file_path, file):
+
+        file_name = os.path.join(file_path, file)
         df = pd.DataFrame(self.matrix)
         if self.matrix.shape[1] > 1:
             df = df.iloc[:, 1:]  # Drops first column
@@ -61,8 +62,8 @@ def main():
     # Iterate through videos
     DATASET_PATH = '/home/d3m1ur60/Desktop/LSBv2/'
     PATH1 = '/home/d3m1ur60/Desktop/LSBv2/Ayuda/ayuda_V1-0002.mp4'
-    PATH2 = '/home/d3m1ur60/Desktop/LSBv2/Bolivia/bolivia_V1-0032.mp4'
-    cap = cv2.VideoCapture(0)
+    PATH2 = '/home/d3m1ur60/Desktop/LSBv2/Bolivia/bolivia_V1-0033.mp4'
+    cap = cv2.VideoCapture(PATH2)
     pastTime = 0
     detector = hm.HolisticDetector()
     counter = 0
@@ -95,7 +96,7 @@ def main():
     print('INTENTO ')
     print(prep.matrix)
     print(prep.matrix.shape)
-    prep.cvt2csv(DATA)
+    prep.cvt2csv(DATA, PATH1)
 
 
 if __name__ == '__main__':
