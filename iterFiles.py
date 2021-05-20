@@ -9,7 +9,7 @@ import holisticModule as hm
 import prepareData as prep
 
 
-def create_dataFolders(self, CATEGORY, DATADIR, LABEL):
+def create_dataFolders(CATEGORY, DATADIR, LABEL):
     detector = hm.HolisticDetector()
     for category in CATEGORY:
         preprocess = prep.Preprocessor()
@@ -25,7 +25,7 @@ def create_dataFolders(self, CATEGORY, DATADIR, LABEL):
                 mat1, mat2, mat3 = detector.get_matrix()
                 feat_vec = prep.get_distMat(mat1, mat2, mat3)
                 preprocess.add_columns(feat_vec)
-            #preprocess.cvt2csv(lblPath,vid)
+            preprocess.cvt2csv(lblPath, vid)
             break
         break
 
@@ -39,7 +39,6 @@ def main():
         os.mkdir(f'{cwd}/labelsLSB')
     LABELS = f'{cwd}/labels'
     create_dataFolders(CATEGORY, DATADIR, LABELS)
-
 
 
 if __name__ == "__main__":

@@ -17,24 +17,27 @@ class Preprocessor:
         self.matrix = np.column_stack((self.matrix, feat_vector))
 
     def cvt2csv(self, file_path, file):
-
-        file_name = os.path.join(file_path, file)
+        print("PRUEBA 2")
+        file = os.path.basename(file)[0:-4]
+        file_name = file_path+file+'.csv'
+        print(file_name)
         df = pd.DataFrame(self.matrix)
         if self.matrix.shape[1] > 1:
             df = df.iloc[:, 1:]  # Drops first column
-        print(df)
+        print("PRUEBA")
+        print(file_name)
         df.to_csv(file_name, index=True)
 
     # p2 is ref point, If you want the the angle between the line defined by these two points and the horizontal axis
-    def get_angleX(self,p1, p2):
+    def get_angleX(self, p1, p2):
         return int(np.round(np.arctan2((p2[1] - p1[1]), (p2[0] - p1[0])) * 180 / np.pi))
 
-    def get_distance(self,p1, p2):
+    def get_distance(self, p1, p2):
         coordinate_distance = math.sqrt(((p1[0] - p2[0]) ** 2) + ((p1[1] - p2[1]) ** 2))
         return int(coordinate_distance)
 
     # Calculate distance matrix from an specific point(in this case NOSE) to the other points of interest
-    def get_distMat(self,matrixHolistic, matrixLeft, matrixRight):
+    def get_distMat(self, matrixHolistic, matrixLeft, matrixRight):
         distList = []
         NOSE = matrixHolistic[0]
         for i in matrixHolistic:
@@ -57,8 +60,8 @@ def main():
     # Check and create data directory
     if not (os.path.exists(f'{cwd}/data')):
         os.mkdir(f'{cwd}/data')
-    DATA = f'{cwd}/data'
-    print(cwd)
+    DATA = cwd+'/data/'
+    print(DATA)
     # Iterate through videos
     DATASET_PATH = '/home/d3m1ur60/Desktop/LSBv2/'
     PATH1 = '/home/d3m1ur60/Desktop/LSBv2/Ayuda/ayuda_V1-0002.mp4'
@@ -96,6 +99,7 @@ def main():
     print('INTENTO ')
     print(prep.matrix)
     print(prep.matrix.shape)
+    print(DATA)
     prep.cvt2csv(DATA, PATH1)
 
 
