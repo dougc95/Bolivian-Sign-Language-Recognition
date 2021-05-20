@@ -62,7 +62,7 @@ def main():
     DATASET_PATH = '/home/d3m1ur60/Desktop/LSBv2/'
     PATH1 = '/home/d3m1ur60/Desktop/LSBv2/Ayuda/ayuda_V1-0002.mp4'
     PATH2 = '/home/d3m1ur60/Desktop/LSBv2/Bolivia/bolivia_V1-0032.mp4'
-    cap = cv2.VideoCapture(PATH2)
+    cap = cv2.VideoCapture(0)
     pastTime = 0
     detector = hm.HolisticDetector()
     counter = 0
