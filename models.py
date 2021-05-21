@@ -15,6 +15,7 @@ from sklearn.model_selection import train_test_split
 DATADIR = 'C:/Users/DougC/PycharmProjects/Bolivian-Sign-Language-Recognition/labelsLSB'
 CATEGORY = ['Ayuda', 'Bolivia', 'Como', 'Dinero', 'Doctor', 'Donde', 'Explicacion', 'Guardar',
             'Necesito', 'Quien Occidente', 'Saludos']
+N_TIME_STEPS = 272
 
 
 def get_dataFolders(CATEGORY, DATADIR):
@@ -26,23 +27,24 @@ def get_dataFolders(CATEGORY, DATADIR):
             file = os.path.join(path, name)
             data = pd.read_csv(file)
             while data.shape[1] < 272:
-                data = np.column_stack((data,np.zeros(42)))
+                data = np.column_stack((data, np.zeros(42)))
             data = pd.DataFrame(data)
-            mag = data.iloc[:,::2]
-            ang = data.iloc[:,1::2]
-            aux = np.stack((mag,ang),axis=2)
+            mag = data.iloc[:, ::2]
+            ang = data.iloc[:, 1::2]
+            aux = np.stack((mag, ang), axis=2)
             segments.append(aux)
             labels.append(category)
-    return labels,segments
-
+    return labels, segments
 
 
 labels, segments = get_dataFolders(CATEGORY, DATADIR)
-N_TIME_STEPS = 272
-N_FEATURES = 42 + 42
-
+print(np.array(segments).shape)
+# reshaped_segments = np.asarray(segments, dtype=int).reshape(-1, , )
+labels = np.asarray(pd.get_dummies(labels), dtype=np.float32)
+print(np.array(labels).shape)
 # WEA
 train_x, test_y, train_y, test_y = train_test_split(segments, labels, test_size=0.2)
+train_x = np.array(train_x)
 
 # Model params
 EPOCHS = 10
