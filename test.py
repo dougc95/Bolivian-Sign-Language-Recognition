@@ -6,7 +6,6 @@ import tensorflow as tf
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout, LSTM, ConvLSTM2D, BatchNormalization
 from tensorflow.keras.callbacks import TensorBoard, ModelCheckpoint
-
 from sklearn import preprocessing
 from collections import deque
 
