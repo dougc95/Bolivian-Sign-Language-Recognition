@@ -39,7 +39,8 @@ def create_dataFolders(CATEGORY, DATADIR, LABEL):
 
 
 def main():
-    DATADIR = '/home/d3m1ur60/Desktop/LSBv2/'
+    # DATADIR = '/home/d3m1ur60/Desktop/LSBv2/'
+    DATADIR = 'C:/Users/DougC/Desktop/LSBv2'
     CATEGORY = ['Ayuda', 'Bolivia', 'Como', 'Dinero', 'Doctor', 'Donde', 'Explicacion', 'Guardar',
                 'Necesito', 'Quien Occidente', 'Quien Oriente', 'Saludos']
     cwd = os.getcwd()
