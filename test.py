@@ -141,5 +141,5 @@ history = model.fit(
     train_x, train_y,
     batch_size=BATCH_SIZE,
     epochs=EPOCHS,
-    validation_data=(validation_x, validation_y),
+    #validation_data=(validation_x, validation_y),
     callbacks=[tensorboard, checkpoint])
