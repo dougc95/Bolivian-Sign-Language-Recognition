@@ -10,6 +10,27 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\labelsLSB\Ayuda\ayuda_V1-0002.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\labelsLSB\Ayuda\ayuda_V1-0035.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\labelsLSB\Ayuda\ayuda_V1-0036.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
       </map>
     </option>
   </component>

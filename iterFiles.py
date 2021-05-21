@@ -32,7 +32,6 @@ def create_dataFolders(CATEGORY, DATADIR, LABEL):
                 mat1, mat2, mat3 = detector.get_matrix()
                 feat_vec = preprocess.get_distMat(mat1, mat2, mat3)
                 preprocess.add_columns(feat_vec)
-
             preprocess.convert2csv(lblPath, vid)
             continue
         continue
