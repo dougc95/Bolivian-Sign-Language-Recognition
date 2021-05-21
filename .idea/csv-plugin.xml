@@ -38,6 +38,27 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\labelsLSB\Bolivia\bolivia_V1-0031.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\labelsLSB\Bolivia\bolivia_V1-0032.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\labelsLSB\Bolivia\bolivia_V1-0033.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
       </map>
     </option>
   </component>
