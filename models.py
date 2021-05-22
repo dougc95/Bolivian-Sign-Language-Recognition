@@ -13,6 +13,7 @@ from collections import deque
 from sklearn.model_selection import train_test_split
 
 DATADIR = 'C:/Users/DougC/PycharmProjects/Bolivian-Sign-Language-Recognition/labelsLSB'
+DATADIR2 = 'C:\\Users\\DougC\\PycharmProjects\\Bolivian-Sign-Language-Recognition\\logs'
 CATEGORY = ['Ayuda', 'Bolivia', 'Como', 'Dinero', 'Doctor', 'Donde', 'Explicacion', 'Guardar',
             'Necesito', 'Quien Occidente', 'Saludos']
 N_TIME_STEPS = 272
@@ -45,14 +46,15 @@ print(np.array(segments).shape)
 labels = np.asarray(pd.get_dummies(labels), dtype=np.float32)
 print(np.array(labels).shape)
 # WEA
-train_x, test_y, train_y, test_y = train_test_split(segments, labels, test_size=0.2)
+train_x, test_x, train_y, test_y = train_test_split(segments, labels, test_size=0.2)
 train_x = np.array(train_x)
-test_y = np.array(test_y)
+test_x = np.array(test_y)
 train_y = np.array(train_y)
 test_y = np.array(test_y)
 
 print('prueba')
 print(train_x.shape)
+
 # Model params
 EPOCHS = 10
 BATCH_SIZE = 64
@@ -82,7 +84,7 @@ model.compile(loss="sparse_categorical_crossentropy",
               optimizer=opt,
               metrics=["accuracy"])
 
-tensorboard = TensorBoard(log_dir=f"logs/{NAME}")
+tensorboard = TensorBoard(log_dir=f"{DATADIR2}\\{NAME}")
 filepath = "RNN_Final-{epoch:02d}-{val_accuracy:.3f}"  # file that will have the epoch and the validation acc for that epoch
 checkpoint = ModelCheckpoint("models/{}.model".format(filepath, monitor='val_accuracy', verbose=1, save_best_only=True,
                                                       mode='max'))  # saves only the best ones
@@ -91,5 +93,5 @@ history = model.fit(
     train_x, train_y,
     batch_size=BATCH_SIZE,
     epochs=EPOCHS,
-    validation_data=(validation_x, validation_y),
+    validation_data=(test_x, test_y),
     callbacks=[tensorboard, checkpoint])
