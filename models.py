@@ -31,9 +31,11 @@ def get_dataFolders(CATEGORY, DATADIR):
             data = pd.DataFrame(data)
             mag = data.iloc[:, ::2]
             ang = data.iloc[:, 1::2]
-            aux = np.stack((mag, ang), axis=2)
+            # aux = np.stack((mag, ang), axis=2)
+            aux = np.vstack((mag, ang))
             segments.append(aux)
-            labels.append(category)
+            labels.append(category)  #Probably reshape de 2
+    print(f"shape interno: {np.array(segments).shape}")
     return labels, segments
 
 
@@ -45,7 +47,12 @@ print(np.array(labels).shape)
 # WEA
 train_x, test_y, train_y, test_y = train_test_split(segments, labels, test_size=0.2)
 train_x = np.array(train_x)
+test_y = np.array(test_y)
+train_y = np.array(train_y)
+test_y = np.array(test_y)
 
+print('prueba')
+print(train_x.shape)
 # Model params
 EPOCHS = 10
 BATCH_SIZE = 64
