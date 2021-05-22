@@ -46,19 +46,17 @@ print(np.array(segments).shape)
 labels = np.asarray(pd.get_dummies(labels), dtype=np.float32)
 print(np.array(labels).shape)
 # WEA
-train_x, test_x, train_y, test_y = train_test_split(segments, labels, test_size=0.2)
+train_x, valid_x, train_y, valid_y = train_test_split(segments, labels, test_size=0.1,random_state=42)
 train_x = np.array(train_x)
-test_x = np.array(test_y)
+valid_x = np.array(valid_x)
 train_y = np.array(train_y)
-test_y = np.array(test_y)
+valid_y = np.array(valid_y)
 
-print('prueba')
-print(train_x.shape)
 
 # Model params
 EPOCHS = 10
-BATCH_SIZE = 64
-NAME = f"{N_TIME_STEPS}-SEQ-PRED-{int(time.time())}"
+BATCH_SIZE = 32
+NAME = f"{EPOCHS}-SEQ-PRED-{int(time.time())}"
 
 model = Sequential()
 model.add(LSTM(128, input_shape=(train_x.shape[1:]), return_sequences=True))
@@ -85,13 +83,9 @@ model.compile(loss="sparse_categorical_crossentropy",
               metrics=["accuracy"])
 
 tensorboard = TensorBoard(log_dir=f"{DATADIR2}\\{NAME}")
-filepath = "RNN_Final-{epoch:02d}-{val_accuracy:.3f}"  # file that will have the epoch and the validation acc for that epoch
-checkpoint = ModelCheckpoint("models/{}.model".format(filepath, monitor='val_accuracy', verbose=1, save_best_only=True,
-                                                      mode='max'))  # saves only the best ones
+filepath = "RNN_Final-{epoch:02d}-{val_accuracy:.2f}"  # file that will have the epoch and the validation acc for that epoch
+checkpoint = ModelCheckpoint("models\\{}.model".format(filepath, monitor='val_accuracy',
+                                                       verbose=1, save_best_only=True, mode='max'))  # saves only the best ones
 
-history = model.fit(
-    train_x, train_y,
-    batch_size=BATCH_SIZE,
-    epochs=EPOCHS,
-    validation_data=(test_x, test_y),
-    callbacks=[tensorboard, checkpoint])
+history = model.fit(train_x, train_y,batch_size=BATCH_SIZE,epochs=EPOCHS,
+                    validation_data=(valid_x, valid_y),callbacks=[tensorboard, checkpoint])

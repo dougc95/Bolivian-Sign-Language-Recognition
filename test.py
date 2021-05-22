@@ -132,7 +132,7 @@ model.compile(loss="sparse_categorical_crossentropy",
               optimizer=opt,
               metrics=["accuracy"])
 
-tensorboard = TensorBoard(log_dir=f"logs/{NAME}")
+tensorboard = TensorBoard(log_dir=f"logs\\{NAME}")
 filepath = "RNN_Final-{epoch:02d}-{val_accuracy:.3f}"  # file that will have the epoch and the validation acc for that epoch
 checkpoint = ModelCheckpoint("models/{}.model".format(filepath, monitor='val_accuracy', verbose=1, save_best_only=True,
                                                       mode='max'))  # saves only the best ones
