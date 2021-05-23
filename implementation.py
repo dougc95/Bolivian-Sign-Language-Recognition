@@ -3,7 +3,7 @@ import tensorflow as tf
 from tensorflow import keras
 import pandas as pd
 import holisticModule as hm
-import prepareData as prepare
+import prepareData as prep
 import numpy as np
 import cv2
 
@@ -28,8 +28,8 @@ def main():
     new_model = tf.keras.models.load_model(PATH_MODEL)
     print(new_model.summary())
     detector = hm.HolisticDetector()
-    prep = prepare.Preprocessor()
-    cap = cv2.VideoCapture(0) # PATH_VIDEO or CAMERA_FEED
+    prepare = prep.Preprocessor()
+    cap = cv2.VideoCapture(PATH_VIDEO) # PATH_VIDEO or CAMERA_FEED
     ret, frame = cap.read()
     while ret:
         ret, frame = cap.read()
