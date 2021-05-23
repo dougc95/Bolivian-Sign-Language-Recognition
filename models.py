@@ -66,8 +66,8 @@ train_y = np.array(train_y)
 valid_y = np.array(valid_y)
 
 # Model params
-EPOCHS = 150
-BATCH_SIZE = 16
+EPOCHS = 20
+BATCH_SIZE = 32
 NAME = f"{EPOCHS}-SEQ-{BATCH_SIZE}-BATCH-{int(time.time())}"
 
 model = Sequential()
