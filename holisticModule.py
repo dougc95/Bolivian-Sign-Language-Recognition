@@ -33,8 +33,8 @@ def get_distMat(matrixHolistic, matrixLeft, matrixRight):
 
 
 class HolisticDetector:
-    def __init__(self, static_image_mode=False, model_complexity=1, smooth_landmarks=True,
-                 min_detection_confidence=0.45, min_tracking_confidence=0.45):
+    def __init__(self, static_image_mode=False, model_complexity=True, smooth_landmarks=True,
+                 min_detection_confidence=0.5, min_tracking_confidence=0.5):
         # Same params required for Holistic
         self.static_image_mode = static_image_mode
         self.model_complexity = model_complexity
@@ -177,7 +177,7 @@ class HolisticDetector:
 def main():
     PATH1 = '/home/d3m1ur60/Desktop/LSBv2/Ayuda/ayuda_V1-0002.mp4'
     PATH2 = '/home/d3m1ur60/Desktop/LSBv2/Bolivia/bolivia_V1-0032.mp4'
-    cap = cv2.VideoCapture(PATH2)
+    cap = cv2.VideoCapture(0)
     pastTime = 0
     detector = HolisticDetector()
     counter = 0
