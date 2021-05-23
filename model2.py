@@ -5,7 +5,7 @@ import random
 import time
 import tensorflow as tf
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, Dropout, LSTM, ConvLSTM2D, BatchNormalization
+from tensorflow.keras.layers import Dense, Dropout, LSTM, TimeDistributed, BatchNormalization
 from tensorflow.keras.callbacks import TensorBoard, ModelCheckpoint
 
 from sklearn import preprocessing
@@ -66,14 +66,19 @@ train_y = np.array(train_y)
 valid_y = np.array(valid_y)
 
 # Model params
-EPOCHS = 150
-BATCH_SIZE = 16
-NAME = f"{EPOCHS}-SEQ-{BATCH_SIZE}-BATCH-{int(time.time())}"
+EPOCHS = 20
+BATCH_SIZE = 32
+NAME = f"{EPOCHS}-SEQ2-{BATCH_SIZE}-BATCH-{int(time.time())}"
 
 model = Sequential()
 model.add(LSTM(128, input_shape=(train_x.shape[1:]), return_sequences=True))
 model.add(Dropout(0.2))
 model.add(BatchNormalization())
+
+model.add(LSTM(128, input_shape=(train_x.shape[1:]), return_sequences=True))
+model.add(TimeDistributed(Dense(64)))
+model.add(BatchNormalization())
+
 
 model.add(LSTM(128, input_shape=(train_x.shape[1:]), return_sequences=True))
 model.add(Dropout(0.1))
@@ -95,7 +100,7 @@ model.compile(loss="categorical_crossentropy",
               metrics=["accuracy"])
 
 tensorboard = TensorBoard(log_dir=f"{DATADIR2}\\{NAME}")
-filepath = "RNN_Final-{epoch:02d}-{val_accuracy:.2f}"  # file that will have the epoch and the validation acc for that epoch
+filepath = "2RNN_Final-{epoch:02d}-{val_accuracy:.2f}"  # file that will have the epoch and the validation acc for that epoch
 checkpoint = ModelCheckpoint("models\\{}.model".format(filepath, monitor='val_accuracy',
                                                        verbose=1, save_best_only=True,
                                                        mode='max'))  # saves only the best ones
