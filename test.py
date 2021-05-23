@@ -6,6 +6,7 @@ import tensorflow as tf
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout, LSTM, ConvLSTM2D, BatchNormalization
 from tensorflow.keras.callbacks import TensorBoard, ModelCheckpoint
+
 from sklearn import preprocessing
 from collections import deque
 
@@ -132,7 +133,7 @@ model.compile(loss="sparse_categorical_crossentropy",
               optimizer=opt,
               metrics=["accuracy"])
 
-tensorboard = TensorBoard(log_dir=f"logs\\{NAME}")
+tensorboard = TensorBoard(log_dir=f"logs/{NAME}")
 filepath = "RNN_Final-{epoch:02d}-{val_accuracy:.3f}"  # file that will have the epoch and the validation acc for that epoch
 checkpoint = ModelCheckpoint("models/{}.model".format(filepath, monitor='val_accuracy', verbose=1, save_best_only=True,
                                                       mode='max'))  # saves only the best ones
@@ -141,5 +142,5 @@ history = model.fit(
     train_x, train_y,
     batch_size=BATCH_SIZE,
     epochs=EPOCHS,
-    #validation_data=(validation_x, validation_y),
+    validation_data=(validation_x, validation_y),
     callbacks=[tensorboard, checkpoint])

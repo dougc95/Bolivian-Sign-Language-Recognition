@@ -58,13 +58,14 @@ def get_dataFolders(CATEGORY, DATADIR, dict):
 labels, segments = get_dataFolders(CATEGORY, DATADIR,dictionary)
 labels = np.asarray(pd.get_dummies(labels), dtype=int)
 print(np.array(labels).shape)
+
 # Prepare input
 train_x, valid_x, train_y, valid_y = train_test_split(segments, labels, test_size=0.2, random_state=42)
 train_x = np.array(train_x)
 valid_x = np.array(valid_x)
 train_y = np.array(train_y)
 valid_y = np.array(valid_y)
-
+print(f'El shape de input es{train_x.shape[1:]}')
 # Model params
 EPOCHS = 20
 BATCH_SIZE = 32
