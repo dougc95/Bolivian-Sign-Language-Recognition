@@ -30,7 +30,6 @@ dictionary = {
     'Quien Occidente': 9,
     'Saludos': 10,
 }
-N_TIME_STEPS = 272
 
 
 def get_dataFolders(CATEGORY, DATADIR, dict):
