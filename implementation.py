@@ -20,29 +20,15 @@ def main():
     prepare = prep.Preprocessor()
     cap = cv2.VideoCapture(PATH_VIDEO)  # PATH_VIDEO or CAMERA_FEED
     ret, frame = cap.read()
-    segment = []
-    counter = 0
     while ret:
-        print(counter)
         ret, frame = cap.read()
-        if not ret:
-            print(np.array(segment).shape)
-            print(f"Video corresponde a {new_model.predict_classes(segment)}")
-            continue
         detector.find_pose(frame)
         detector.get_lm()
         mat1, mat2, mat3 = detector.get_matrix()
         feat_vec = prepare.get_distMat(mat1, mat2, mat3)
         feat_vec = np.array(feat_vec)
         aux = numpy.concatenate((feat_vec[:, 0], feat_vec[:, 1]))
-        if counter == 135:
-            print(np.array(segment).shape)
-            print(f"Video corresponde a {new_model.predict_classes(segment)}")
-            counter = 0
-        else:
-            segment.append(aux)
-        counter = counter + 1
-
+        print(f"Video corresponde a {new_model.predict_classes(aux)}")
 
 if __name__ == '__main__':
     main()
