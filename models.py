@@ -1,15 +1,11 @@
 import os
 import numpy as np
 import pandas as pd
-import random
 import time
 import tensorflow as tf
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout, LSTM, ConvLSTM2D, BatchNormalization
 from tensorflow.keras.callbacks import TensorBoard, ModelCheckpoint
-
-from sklearn import preprocessing
-from collections import deque
 from sklearn.model_selection import train_test_split
 
 DATADIR = 'C:/Users/DougC/PycharmProjects/Bolivian-Sign-Language-Recognition/labelsLSB'
