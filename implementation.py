@@ -28,7 +28,8 @@ def main():
         feat_vec = prepare.get_distMat(mat1, mat2, mat3)
         feat_vec = np.array(feat_vec)
         aux = numpy.concatenate((feat_vec[:, 0], feat_vec[:, 1]))
-        print(f"Video corresponde a {new_model.predict_classes(aux)}")
+
+        print(f"Video corresponde a {new_model.predict_classes(())}")
 
 if __name__ == '__main__':
     main()

@@ -4,10 +4,7 @@ import math
 import mediapipe as mp
 
 
-# TODO
-# Normalize entry IMG(size,ROI)
-# Calibration method required
-# Create LSTM Model
+
 
 def get_distance(p1, p2):
     coordinate_distance = math.sqrt(((p1[0] - p2[0]) ** 2) + ((p1[1] - p2[1]) ** 2))

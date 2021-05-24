@@ -32,7 +32,7 @@ dictionary = {
 }
 
 
-def get_dataFolders(CATEGORY, DATADIR, dict):
+def get_dataFolders(CATEGORY, DATADIR, dict, time_step=1, step=1):
     labels = []
     segments = []
     for category in CATEGORY:
