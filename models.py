@@ -36,7 +36,7 @@ def get_dataFolders(CATEGORY, DATADIR, dict, time_step=1, step=1):
         for name in os.listdir(path):
             file = os.path.join(path, name)
             data = pd.read_csv(file)
-            while data.shape[1] < 272:
+            while data.shape[1] < 272:  # 136*2
                 data = np.column_stack((data, np.zeros(42)))
             data = pd.DataFrame(data)
             mag = data.iloc[:, ::2]
