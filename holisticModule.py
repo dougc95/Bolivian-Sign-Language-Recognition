@@ -74,7 +74,7 @@ class HolisticDetector:
                 self.lmListRight.append([number, cx, cy])
 
     def draw_pose(self, frame):
-        self.mpDraw.draw_landmarks(frame, self.results.pose_landmarks, self.mpHolistic.POSE_CONNECTIONS)
+        self.mpDraw.draw_landmarks(frame, self.results.pose_landmarks, self.mpHolistic.UPPER_BODY_POSE_CONNECTIONS)
         self.mpDraw.draw_landmarks(frame, self.results.left_hand_landmarks, self.mpHolistic.HAND_CONNECTIONS)
         self.mpDraw.draw_landmarks(frame, self.results.right_hand_landmarks, self.mpHolistic.HAND_CONNECTIONS)
         return frame
@@ -179,7 +179,7 @@ def main():
     while True:
         ret, frame = cap.read()
         if not ret:
-            break
+            continue
         # Call Detection
         detector.find_pose(frame)  # Must be called for each detection
         detector.get_lm()
