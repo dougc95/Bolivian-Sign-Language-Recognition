@@ -171,15 +171,15 @@ class HolisticDetector:
 
 def main():
     PATH1 = '/home/d3m1ur60/Desktop/LSBv2/Ayuda/ayuda_V1-0002.mp4'
-    PATH2 = '/home/d3m1ur60/Desktop/LSBv2/Bolivia/bolivia_V1-0032.mp4'
-    cap = cv2.VideoCapture(0)
+    PATH_VIDEO = 'C:\\Users\\DougC\\Desktop\\LSBv1\\Ayuda\\ayuda_V1-0001.mp4'
+    cap = cv2.VideoCapture(PATH_VIDEO)
     pastTime = 0
     detector = HolisticDetector()
     counter = 0
     while True:
         ret, frame = cap.read()
         if not ret:
-            continue
+            break
         # Call Detection
         detector.find_pose(frame)  # Must be called for each detection
         detector.get_lm()
