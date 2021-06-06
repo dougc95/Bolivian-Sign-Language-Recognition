@@ -8,6 +8,7 @@ import cv2
 
 PATH_MODEL = 'C:\\Users\\DougC\\Desktop\\Special\\RNN_Final-151-0.75.model'
 PATH_VIDEO = 'C:\\Users\\DougC\\Desktop\\Special\\variado_V1-0007.mp4'
+# PATH_VIDEO = 'C:\\Users\\DougC\\Desktop\\LSBv1\\Donde\\donde_V1-0001.mp4'
 
 
 CATEGORY = ['Ayuda', 'Bolivia', 'Como', 'Dinero', 'Doctor', 'Donde', 'Explicacion', 'Guardar',
@@ -53,10 +54,18 @@ def main():
         print(type(vec))
         vec = np.asarray(vec, dtype= np.float32).reshape(-1, 136, 84)
         prediction = new_model.predict(vec, steps=1, verbose=0)
-        print(CATEGORY[np.argmax(prediction)])
-        # print(f"Video corresponde a {new_model.predict(vec)}")
-        # model.predict(x=valid_x, steps=len(valid_y), verbose=0)
-        # vec = np.zeros(84)
+        tic = time.time()
+        inference = CATEGORY[np.argmax(prediction)]
+        print(inference)
+        toc = time.time()
+        print(f'El tiempo de inferencia: {1000*(toc-tic)}')
+
+        import pyttsx3
+        engine = pyttsx3.init()
+        voices = engine.getProperty('voices')
+        engine.setProperty("voice", voices[2].id)
+        engine.say(str(inference))
+        engine.runAndWait()
 
 
 if __name__ == '__main__':
