@@ -40,7 +40,7 @@ class VideoThread(QThread):
 
     def __init__(self):
         super().__init__()
-        self.source = 0
+        self.source = 1  # CheckFlag if with cable
         self.model = 'C:\\Users\\DougC\\Desktop\\Special\\RNN_Final-151-0.75.model'
         self.modelType = "LSTM Stacked"
         self.draw = False
@@ -68,7 +68,7 @@ class VideoThread(QThread):
         if self.modelType == "LSTM Stacked":
             seq_length = 136
         if self.modelType == "LSTM BiDirectional":
-            seq_length = 97
+            seq_length = 90
         while self._run_flag:
             ret, frame = cap.read()
             if not ret:
@@ -386,7 +386,7 @@ class Ui_MainWindow(object):
     def gen_report(self):
         flagSource = self.get_source()
         if not flagSource:
-            source = 0
+            source = 1  # CheckFlag if with cable
         else:
             source = self.txtFile.text()
         draw = self.get_draw()
@@ -429,7 +429,7 @@ class Ui_MainWindow(object):
         if type == "LSTM Stacked":
             return 'C:\\Users\\DougC\\Desktop\\Special\\RNN_Final-151-0.75.model'
         if type == "LSTM BiDirectional":
-            return "C:\\Users\\DougC\\Desktop\\Special\\model79LSTM\\models\\BiLSTMCuDNN0.4-128-0.79.model"
+            return "C:\\Users\\DougC\\Desktop\\Special\\test80.h5"
 
 
 if __name__ == "__main__":
