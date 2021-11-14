@@ -5,7 +5,7 @@ This project aims to be the first step towards Dynamic Gesture Recognition in th
 ## Dataset
 
 
-Since this is the first approach ever made on dynamic gesture concerning LSB, we had to make our own dataset. To be able to download the dataset LSA12 folow this link, this dataset consist on twelve gestures commonly used and were selected alongside interpreters.
+Since this is the first approach ever made on dynamic gesture concerning LSB, we had to make our own dataset. To be able to download the dataset **[LSA12](https://drive.google.com/file/d/1pZrhHLE_h3hMxblaG6Bpx0FPiJu68Prr/view?usp=sharing)** , this dataset consist on twelve gestures commonly used and were selected alongside interpreters.
 1. Ayuda
 2. Bolivia
 3. Como
@@ -23,11 +23,13 @@ Some features of the proccesss that might be relevant for future work, the heigh
 
 ## Feature Extracction
 
-We worked on this project using Mediapipe, using some of the points that can be extracted via it's Pose Estmiation module. The algorithm that exectues the iterarionts for each frame in each video is on prepareData.py
+We worked on this project using **[Mediapipe](https://google.github.io/mediapipe/solutions/solutions.html)**, using some of the points that can be extracted via it's Pose Estmiation module. The algorithm that exectues the iterarionts for each frame in each video is on prepareData.py
+
+![Feature Map](./pose_tracking_full_body_landmarks.png)
 
 ## Trainning
 
-The RNN was made using Tensorflow+Keras, we had the best perfomance using Bidirecctional NN with Recurrent dropouts. As a suggesttion for those who attemp the same method try playing with the temporal window, the best perfomance comes aorund 75 to 90 frames
+The RNN was made using Tensorflow+Keras **[LSTM](https://keras.io/api/layers/recurrent_layers/lstm/)** units, we had the best perfomance using Bidirecctional NN with Recurrent dropouts. As a suggesttion for those who attemp the same method try playing with the temporal window, the best perfomance comes aorund 75 to 90 frames
 
 ## GUI
 
