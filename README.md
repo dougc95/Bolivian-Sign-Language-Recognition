@@ -5,7 +5,7 @@ This project aims to be the first step towards Dynamic Gesture Recognition in th
 ## Dataset
 
 
-Since this is the first approach ever made on dynamic gesture concerning LSB, we had to make our own dataset. To be able to download the dataset **[LSA12](https://drive.google.com/file/d/1pZrhHLE_h3hMxblaG6Bpx0FPiJu68Prr/view?usp=sharing)** , this dataset consist on twelve gestures commonly used and were selected alongside interpreters.
+Since this is the first approach ever made on dynamic gesture concerning LSB, we had to make our own dataset. To be able to download the dataset **[LSB12](https://drive.google.com/file/d/1pZrhHLE_h3hMxblaG6Bpx0FPiJu68Prr/view?usp=sharing)** , this dataset consist on twelve gestures commonly used and were selected alongside interpreters.
 1. Ayuda
 2. Bolivia
 3. Como
